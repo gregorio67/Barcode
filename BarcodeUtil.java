@@ -76,14 +76,17 @@ public class BarCodeUtil {
 	
 	public static void createQRBarcode(String text, String outFile, int width, int height, String imageFormat) throws Exception {
 
-		if ("gif".equalsIgnoreCase(imageFormat) || "tiff".equalsIgnoreCase(imageFormat) || "jpeg".equalsIgnoreCase(imageFormat)) {
+		if ("gif".equalsIgnoreCase(imageFormat) || "tiff".equalsIgnoreCase(imageFormat) || "jpeg".equalsIgnoreCase(imageFormat) || "png".equalsIgnoreCase(imageFormat)) {
 			BitMatrix bitMatrix = new QRCodeWriter().encode(text, BarcodeFormat.QR_CODE, width, height);
 			MatrixToImageWriter.writeToStream(bitMatrix, imageFormat, new FileOutputStream(new File(outFile)));					
+		}
+		else {
+			throw new RuntimeException("Barcode image type is not supported");
 		}
 		
 	}
 		
-	public static void readQRBarcode(String inFile) throws Exception {
+	public static String readQRBarcode(String inFile) throws Exception {
 		InputStream barCodeInputStream = new FileInputStream(inFile);
 		BufferedImage barCodeBufferedImage = ImageIO.read(barCodeInputStream);
 
@@ -92,7 +95,7 @@ public class BarCodeUtil {
 		Reader reader = new MultiFormatReader();
 		Result result = reader.decode(bitmap);
 
-		System.out.println("Barcode text is " + result.getText());		
+		return result.getText();		
 	}
 	
 
@@ -112,13 +115,16 @@ public class BarCodeUtil {
 	
 	public static void createPDF417Barcode(String text, String outFile, int width, int height, String imageFormat) throws Exception {
 
-		if ("gif".equalsIgnoreCase(imageFormat) || "tiff".equalsIgnoreCase(imageFormat) || "jpeg".equalsIgnoreCase(imageFormat)) {
+		if ("gif".equalsIgnoreCase(imageFormat) || "tiff".equalsIgnoreCase(imageFormat) || "jpeg".equalsIgnoreCase(imageFormat) || "png".equalsIgnoreCase(imageFormat)) {
 			BitMatrix bitMatrix = new PDF417Writer().encode(text, BarcodeFormat.PDF_417, width, height);
 			MatrixToImageWriter.writeToStream(bitMatrix, imageFormat, new FileOutputStream(new File(outFile)));		
 		}
+		else {
+			throw new RuntimeException("Barcode image type is not supported");
+		}		
 	}
 	
-	public static void readPDF417Barcode(String inFile) throws Exception {
+	public static String readPDF417Barcode(String inFile) throws Exception {
 		InputStream barCodeInputStream = new FileInputStream(inFile);
 		BufferedImage barCodeBufferedImage = ImageIO.read(barCodeInputStream);
 
@@ -127,7 +133,18 @@ public class BarCodeUtil {
 		Reader reader = new MultiFormatReader();
 		Result result = reader.decode(bitmap);
 
-		System.out.println("Barcode text is " + result.getText());		
+		return result.getText();		
 	}
 	
+	
+	public static void main(String args[]) throws Exception {
+		String filename = "D:/temp/qr_test_barcode.png";
+		String filename1 = "D:/temp/pdf417_test_barcode.png";
+		createQRBarcode("This is qr bar code test", filename);
+		System.out.println("Read Text :: " + readQRBarcode(filename));
+
+		createPDF417Barcode("This is pdf 417 bar code test", filename1);
+		System.out.println("Read Text :: " + readPDF417Barcode(filename1));
+
+	}
 }
