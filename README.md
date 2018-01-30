@@ -1,4 +1,4 @@
-# This project generate QR Barcode and pdf417 barcode 
+# This project generates QR Barcode and pdf417 barcode 
 
 
   For using this util, you shlold set the dependency as below.
@@ -14,3 +14,7 @@
   <artifactId>javase</artifactId>
   <version>3.3.0</version>
  </dependency>	
+ 
+ The method of createQRBarcode generates QR Bar code. 
+ The method of createPDF417Barcode geneatats PDF 417 bar code.
+ 
