@@ -100,16 +100,16 @@ public class BarCodeUtil {
 	
 
 	public static void createPDF417Barcode(String text, String outFile) throws Exception {
-		createQRBarcode(text,outFile, BARCODE_DEFAULT_WIDTH, BARCODE_DEFAULT_HEIGHT, BARCODE_DEFAULT_IMAGE_FORMAT);
+		createPDF417Barcode(text,outFile, BARCODE_DEFAULT_WIDTH, BARCODE_DEFAULT_HEIGHT, BARCODE_DEFAULT_IMAGE_FORMAT);
 	}
 
 	public static void createPDF417Barcode(String text, String outFile, String imageFormat) throws Exception {
-		createQRBarcode(text,outFile, BARCODE_DEFAULT_WIDTH, BARCODE_DEFAULT_HEIGHT, imageFormat);
+		createPDF417Barcode(text,outFile, BARCODE_DEFAULT_WIDTH, BARCODE_DEFAULT_HEIGHT, imageFormat);
 		
 	}
 
 	public static void createPDF417Barcode(String text, String outFile, int width, int height) throws Exception {
-		createQRBarcode(text,outFile, width, height, BARCODE_DEFAULT_IMAGE_FORMAT);
+		createPDF417Barcode(text,outFile, width, height, BARCODE_DEFAULT_IMAGE_FORMAT);
 		
 	}
 	
